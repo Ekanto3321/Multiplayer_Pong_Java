@@ -20,7 +20,9 @@ public class ClientL extends JFrame {
         DrawingPane p = new DrawingPane();
         add(p);
 
-
+        /*
+        this just takes the mouse Y coordinates
+         */
         addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
@@ -34,7 +36,9 @@ public class ClientL extends JFrame {
         });
 
 
-        //Frame stuff
+        /*
+        this portion is responsible for creating the frame for the client
+         */
         setSize(WINDOW_WIDTH,WINDOW_HEIGHT);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -43,7 +47,13 @@ public class ClientL extends JFrame {
         setResizable(false);
 
 
-        //networking stuff
+        /*
+        this sends the mouse Y coordinate values to the server to process and receives
+        the coordinate values of the necessary elements which it then offloads to the
+        DrawingPane class to draw on screen. This refreshes every time the server sends
+        the data and the cycle completes 60 times every second which is controlled by
+        the servers tick rate.
+         */
         try {
             socket = new Socket("localhost", 1234);
             osw = new OutputStreamWriter(socket.getOutputStream());

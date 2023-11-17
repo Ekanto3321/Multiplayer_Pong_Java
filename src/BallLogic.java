@@ -2,8 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
-public class BallLogic {
 
+public class BallLogic {
 
     Random random = new Random();
     int ballXVelocity = 2;
@@ -15,7 +15,11 @@ public class BallLogic {
     int s2 = 0;
 
 
-
+    /*
+    all the core logic of the ball including the collision and the
+    scoring system is handled here. The server simulates a version of
+    the instance to calculate necessary things.
+    */
     public String runLogic(){
         by+=ballYVelocity*YdirectionVector;
         bx+=ballXVelocity*XdirectionVector;
@@ -67,11 +71,18 @@ public class BallLogic {
         return y1+" "+y2+ " "+bx+" "+by+" "+s1+" "+s2;
     }
 
+    /*
+    This class creates a random direction for the x and y direction vectors
+     */
     public int setRandomDirection(){
         if(random.nextBoolean())return -1;
         else return 1;
     }
 
+    /*
+    The coordinates are sent here and this calls the above logic class
+    and returns the updated coordinates of both paddles and the ball
+     */
     public String setCoordinates(int y1, int y2, int bx, int by,int s1,int s2){
         this.y1 =y1;
         this.y2 =y2;
@@ -87,6 +98,12 @@ public class BallLogic {
 }
 
 
+/*
+These two classes are required to extend Rectangle because they
+interact with each other, and we can calculate the collision using
+the intersects() method of the Rectangle class which makes it easier
+for us.
+*/
 class Paddle extends Rectangle{
     Paddle(int x, int y){
         super(x,y,20,100);

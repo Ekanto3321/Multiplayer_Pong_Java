@@ -63,12 +63,12 @@ public class Server {
                         int paddle2 = player2paddle.get();
 
 
-                        //ball logic
 
-
-
+                        /*
+                        This whole portion sends off the received coordinate data to the ballLogic class
+                        and returns the updated coordinates to the clients
+                         */
                         String s[] = b.setCoordinates(paddle1,paddle2,ballX,ballY,score1,score2).split(" ");
-
                         paddle1 = Integer.parseInt(s[0]);
                         paddle2 = Integer.parseInt(s[1]);
                         ballX = Integer.parseInt(s[2]);
